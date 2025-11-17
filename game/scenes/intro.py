@@ -1,20 +1,20 @@
 import pygame
 import sys
 
-# ======= Cấu hình cơ bản =======
+
 pygame.init()
 WIDTH, HEIGHT = 400, 500
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
 pygame.display.set_caption("2048 Menu")
 
-# ======= Màu sắc =======
+
 BG_COLOR = (250, 248, 239)
 TEXT_COLOR = (119, 110, 101)
 BUTTON_COLOR = (143, 122, 102)
 BUTTON_HOVER = (156, 133, 116)
 WHITE = (255, 255, 255)
 
-# ======= Font chữ =======
+
 TITLE_FONT = pygame.font.Font(None, 100)
 BUTTON_FONT = pygame.font.Font(None, 36)
 CREDIT_FONT = pygame.font.Font(None, 24)
@@ -24,7 +24,7 @@ input_active = False
 player_name = ""
 input_box = pygame.Rect(120, 430, 160, 50)
 
-# ======= Định nghĩa lớp Button =======
+
 class Button:
     def __init__(self, text, x, y, width, height, callback):
         self.text = text
@@ -45,7 +45,7 @@ class Button:
             if self.rect.collidepoint(event.pos):
                 self.callback()
 
-# ======= Các hàm xử lý =======
+
 def start_new_game():
     global player_name, input_active
     input_active = True
@@ -57,26 +57,26 @@ def play_with_ai():
 def open_settings():
     print("Mở phần cài đặt...")
 
-# ======= Tạo các nút =======
+
 buttons = [
     Button("New Game", 120, 220, 160, 50, start_new_game),
     Button("Play with AI", 120, 290, 160, 50, play_with_ai),
     Button("Settings", 120, 360, 160, 50, open_settings)
 ]
 
-# ======= Vòng lặp chính =======
+
 running = True
 clock = pygame.time.Clock()
 while running:
     SCREEN.fill(BG_COLOR)
-    width, height = SCREEN.get_size()  # >>> LẤY KÍCH THƯỚC MỚI NHẤT <<<
+    width, height = SCREEN.get_size() 
 
-    # --- Vẽ tiêu đề ---
+   
     title_surface = TITLE_FONT.render("2048", True, TEXT_COLOR)
-    title_rect = title_surface.get_rect(center=(width // 2, 120))  # >>> SỬA: dùng width thay vì WIDTH <<<
+    title_rect = title_surface.get_rect(center=(width // 2, 120))  
     SCREEN.blit(title_surface, title_rect)
 
-    # --- Vẽ nút hoặc ô nhập tên ---
+   
     if input_active:
         promt_surface = INPUT_FONT.render("Enter Name:", True, TEXT_COLOR)
         SCREEN.blit(promt_surface, (width // 2 - promt_surface.get_width() // 2, 220))
@@ -89,25 +89,25 @@ while running:
         SCREEN.blit(text_surface, (input_box.x + 10, input_box.y + 10))
 
     else:
-        # ===== Vẽ các nút căn giữa theo kích thước mới =====
+        
         for i, button in enumerate(buttons):
-            button.rect.centerx = width // 2  # >>> SỬA: nút luôn giữa khi phóng to <<<
+            button.rect.centerx = width // 2  
             button.rect.y = 220 + i * 70
             button.draw(SCREEN)
 
-        # --- Ghi chú ---
+        
         credit_surface = CREDIT_FONT.render("D0 AN PYTHON - NH0M 5 ", True, TEXT_COLOR)
         credit_rect = credit_surface.get_rect(center=(width // 2, height - 30))
         SCREEN.blit(credit_surface, credit_rect)
 
-    # --- Sự kiện ---  # 
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
             pygame.quit()
             sys.exit()
 
-        # ==== Xử lí thay đổi kích thước của cửa sổ ====
+        
         if event.type == pygame.VIDEORESIZE:
             SCREEN = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
 

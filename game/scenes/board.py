@@ -249,18 +249,19 @@ def play(name):
                 if BACK_BTN_RECT.collidepoint(event.pos):
                     return 
             elif event.type == pygame.KEYDOWN:
-                board = process_move_with_slide_animation(event,board,name) #FIX O DAY
-        pygame.display.update()
-        if (check_game_over(board)):
-            restart=draw_over()
-            if restart:
-                board=initboard()
-            else:
-                running=False
-        if (check_win(board)):
-            conti=draw_win()
-            if not conti:
-                board=initboard()
+                board = process_move_with_slide_animation(event,board,name)
+                drawboard(board,name)
+                pygame.display.update()
+                if (check_game_over(board)):
+                    restart=draw_over()
+                    if restart:
+                        board=initboard()
+                    else:
+                        running=False
+                if (check_win(board)):
+                    conti=draw_win()
+                    if not conti:
+                        board=initboard()
 
 def animate_slide_tiles(surface, old_board, new_board, direction):
    

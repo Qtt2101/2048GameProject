@@ -1,6 +1,6 @@
-Đây là dự án game 2048 được xây dựng bằng Python và thư viện Pygame.  
+Đây là dự án game 2048 được xây dựng bằng Python và thư viện Pygame.
 
-Yêu cầu hệ thống:  
+Yêu cầu hệ thống:
 
 -Python 3.10.19 trở lên
 
